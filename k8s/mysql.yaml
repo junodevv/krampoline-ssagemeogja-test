@@ -15,7 +15,7 @@ spec:
       containers:
         - name: mysql
           # 여러분의 mysql image 주소를 입력해주세요.
-          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_ea354e270db1
+          image: mysql
           env:
             - name: TZ
               value: Asia/Seoul
