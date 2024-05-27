@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: krampoline
+spec:
+  selector:
+    matchLabels:
+      app: krampoline
+  template:
+    metadata:
+      labels:
+        app: krampoline
+    spec:
+      containers:
+        - name: krampoline
+          # 여러분의 image 주소를 입력해주세요.
+          image: krmp-d2hub-idock.9rum.cc/dev-test/repo_a52862c36012
+          imagePullPolicy: Always
+          env:
+            - name: JASYPT_ENCRYPTOR_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: krampoline-secret
+                  key: jasyptKey
+            - name: DATABASE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: krampoline-secret
+                  key: databaseUrl
+            - name: KRAMPOLINE_HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: KRAMPOLINE_HOST_PORT
+              value: "80"

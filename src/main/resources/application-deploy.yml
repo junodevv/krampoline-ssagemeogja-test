@@ -1,0 +1,69 @@
+spring:
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: ENC(SgyhNpimVFEoQv9a5MChlCiao3nJgYEjGxB/3KAtTlhYxEeZdrD3PzJ0Io2vnrLS)
+            redirect-uri: https://${KRAMPOLINE_HOST_IP}:${KRAMPOLINE_HOST_PORT}/login/oauth2/callback/kakao
+            client-authentication-method: client_secret_post
+            authorization-grant-type: authorization_code
+            scope:
+              - profile_nickname
+              - profile_image
+              - account_email
+            client-name: Kakao
+        provider:
+          kakao:
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            user-name-attribute: id
+  data:
+    redis:
+      host: localhost
+      port: 6379
+  thymeleaf:
+    cache: false
+    check-template-location: true
+    prefix: classpath:/templates/
+    suffix: .html
+  sql:
+    init:
+      platform: mysql
+      mode: always
+  datasource:
+    url: ${DATABASE_URL}?useUnicode=true&characterEncoding=utf8&serverTimezone=UTC
+    username: ENC(WDRhDR82jagUGYf6sUMXeA==)
+    password: ENC(oMm0+X9Ho72GSrmUJOb9bQ==)
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        highlight_sql: true
+    hibernate:
+      ddl-auto: validate
+    defer-datasource-initialization: true
+
+jwt:
+  secret: ENC(7kZtvyRlzXjVdNHt8cyWg+1XRqosKTVcq+o1apX4xQmP2ZY2nnPkATLDev2IjZWT4orx4/T4bHuIcyqhssP6mg==)
+  expiration: 3000
+
+app:
+  upload:
+    dir: uploads/img
+
+jasypt:
+  encryptor:
+    bean: jasyptStringEncryptor
+
+kakao:
+  rest:
+    api:
+      key: ENC(WtmsCNhytxXOPencBobCEv6weKiLloqWgmz0IyKzYI2yWr/tunFfjjlD4EK5xNrn)
+
+krampoline:
+  host:
+    url: https://${KRAMPOLINE_HOST_IP}
+    port: ${KRAMPOLINE_HOST_PORT}
